@@ -1,7 +1,8 @@
 import { Router } from "express"
-import { addBaptism } from "../controllers/baptismController.js"
+import { addBaptism, getBaptismToNameLastname } from "../controllers/baptismController.js"
 const router= new Router()
 
 router.post('/addBaptism', addBaptism)
+router.get('/getBaptismToNameLastname', getBaptismToNameLastname)
 
 export default router

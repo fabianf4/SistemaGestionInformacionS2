@@ -1,19 +1,5 @@
 import baptismalCeritificateModel from "../models/baptismalCertificateModel.js";
 
-const errors = {
-    loginError: (res) => {
-        return res.status(404).json({
-            success: false,
-            message: "Usuario y/o contraseña incorrectos"
-        })
-    },
-    internalServerError: (res) => {
-        return res.status(500).json({
-            success: false,
-            message: "Algo a salido mal"
-        })
-    }
-}
 export async function addBaptism(req, res){
     const{book, invoice, number, name, lastName, birthdate, baptismDate, fatherName, motherName, maternalGrandfather, maternalGrandmother, paternalGrandmother, paternalGrandfather,godfather, godmother, minister, parson, annotations}= req.body
     try{
@@ -41,6 +27,26 @@ export async function addBaptism(req, res){
         return res.status(200).json({
             success: false,
             message: "Error creando acta de bautismo"
+        })
+    }
+}
+export async function getBaptismToNameLastname(req, res){
+    const {name, lastname}= req.body
+    try{
+        const baptism =await baptismalCeritificateModel.findAll({
+            where: {name, lastname}
+        })
+        return res.status(200).json({
+            success: true,
+            data:{
+                baptism
+            },
+            message: "Acta(s) encontrada"
+        })
+    }catch(err){
+        return res.status(200).json({
+            success: false,
+            message: "No se encontraron actas"
         })
     }
 }
