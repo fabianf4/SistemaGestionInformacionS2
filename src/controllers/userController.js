@@ -90,3 +90,29 @@ export async function login(req, res) {
         errors.internalServerError(res)
     }
 }
+
+export async function getUser(req, res) {
+    const uuid = req.body.uuid
+
+    try {
+        const user = await userModel.findOne({ where: { uuid } })
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "No se encontro el usuario"
+            })
+        }
+
+        return res.status(200).json({
+            success: true,
+            data: {
+                user
+            },
+            message: "Usuario encontrado"
+        })
+    } catch (error) {
+        console.log(error)
+        error.internalServerError(res)
+    }
+}
