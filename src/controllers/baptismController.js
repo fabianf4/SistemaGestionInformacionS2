@@ -50,3 +50,32 @@ export async function getBaptismToNameLastname(req, res){
         })
     }
 }
+export async function deleteBaptism(req, res){
+    try{  
+        
+        const {book, invoice, number}= req.body
+        const baptism =await baptismalCeritificateModel.findOne({
+            where: {book, invoice, number}
+        })
+
+        if(!baptism){
+            return res.status(404).json({
+            success: false,
+            message: 'Registro no encontrado'
+            });
+        }
+        await baptism.destroy();
+
+        return res.status(200).json({
+            success: true,
+            message: 'Registro eliminado exitosamente'
+        });
+        
+    } catch(err) {
+        return res.status(500).json({
+          success: false,
+          message: 'Error eliminando registro de bautismo'
+        });
+      }
+    
+}
