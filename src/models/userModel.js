@@ -30,7 +30,14 @@ const userModel = sequalize.define("User", {
     password: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    role: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: "USER"
     }
+},{
+    alter: true
 })
 
 //create table if not exists

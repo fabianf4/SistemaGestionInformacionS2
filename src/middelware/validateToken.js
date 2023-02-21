@@ -20,7 +20,8 @@ const validateToken = (req, res, next) => {
             })
         }
 
-        req.uuid = decodedToken.uuid
+        req.body.uuid = decodedToken.uuid
+        req.body.role = decodedToken.role
         next()
     })
 }

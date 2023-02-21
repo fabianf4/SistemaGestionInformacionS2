@@ -71,9 +71,13 @@ export async function login(req, res) {
             errors.loginError(res)
         }
 
-        const token = jsonwebtoken.sign({ uuid: user.uuid }, JWT_SECRET, {
-            expiresIn: JWT_EXPIRES_IN_SECONDS
-        })
+        const token = jsonwebtoken.sign(
+            { uuid: user.uuid, role: user.role },
+            JWT_SECRET,
+            {
+                expiresIn: JWT_EXPIRES_IN_SECONDS
+            }
+        )
 
         return res.status(200).json({
             success: true,
