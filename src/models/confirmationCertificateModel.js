@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize"
 import sequalize from "../config/mysqlConfig.js"
 
 
-//Create model to confirmation certificate
+////Create model to Confirmation certificate
 const confirmationCertificateModel = sequalize.define("confirmationCertificateModel",{
     book:{
         type: DataTypes.TINYINT,
