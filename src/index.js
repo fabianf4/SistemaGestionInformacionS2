@@ -2,6 +2,7 @@ import dotenv from "dotenv"
 import express from "express"
 import morgan from "morgan"
 import userRouter from "./routers/userRouter.js"
+import confirmationRouter from "./routers/confirmationRouter.js"
 import baptismRouter from "./routers/baptismRouter.js"
 import cors from "cors"
 
@@ -27,6 +28,7 @@ const PORT = process.env.PORT || 3001
 //routes
 app.use("/user", userRouter)
 app.use("/baptism", baptismRouter)
+app.use("/confirmation", confirmationRouter)
 
 app.get("/api-healt", (req, res) => {
     res.status(200).send("API is running")

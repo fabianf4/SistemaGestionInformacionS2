@@ -21,7 +21,7 @@ const confirmationCertificateModel = sequalize.define(
             type: DataTypes.STRING,
             allowNull: false
         },
-        lastName: {
+        lastname: {
             type: DataTypes.STRING,
             allowNull: false
         },
