@@ -20,7 +20,7 @@ const baptismalCeritificateModel = sequalize.define("baptismalCertificateModel",
         type: DataTypes.STRING,
         allowNull: false
     }, 
-    lastName:{
+    lastname:{
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -76,6 +76,9 @@ const baptismalCeritificateModel = sequalize.define("baptismalCertificateModel",
         type: DataTypes.STRING,
         allowNull: true
     }
+},
+{
+    alter: true
 })
 baptismalCeritificateModel.sync()
 export default baptismalCeritificateModel
