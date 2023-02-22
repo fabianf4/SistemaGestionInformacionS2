@@ -1,14 +1,21 @@
 import dotenv from "dotenv"
-
 import express from "express"
 import morgan from "morgan"
 import userRouter from "./routers/userRouter.js"
 import baptismRouter from "./routers/baptismRouter.js"
+import cors from "cors"
 
 const app = express()
 
 //use dotenv to read .env file
 dotenv.config()
+
+//use cors
+app.use(cors(
+    {
+        origin: "*",
+    }
+))
 
 //use express.json() to parse json data
 app.use(morgan("dev"))

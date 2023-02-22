@@ -9,7 +9,7 @@ const ENCRYPT_SALT = parseInt(process.env.ENCRYPT_SALT)
 
 const errors = {
     loginError: (res) => {
-        return res.status(404).json({
+        return res.status(200).json({
             success: false,
             message: "Usuario y/o contraseña incorrectos"
         })
@@ -59,7 +59,7 @@ export async function login(req, res) {
     try {
         const user = await userModel.findOne({ where: { email } })
         if (!user) {
-            errors.loginError(res)
+           return errors.loginError(res)
         }
 
         const isPasswordCorrect = await bcryptjs.compare(
@@ -68,7 +68,7 @@ export async function login(req, res) {
         )
 
         if (!isPasswordCorrect) {
-            errors.loginError(res)
+            return errors.loginError(res)
         }
 
         const token = jsonwebtoken.sign(
@@ -87,7 +87,7 @@ export async function login(req, res) {
             message: "Ingreso exitoso"
         })
     } catch (err) {
-        errors.internalServerError(res)
+        return errors.internalServerError(res)
     }
 }
 
@@ -98,7 +98,7 @@ export async function getUser(req, res) {
         const user = await userModel.findOne({ where: { uuid } })
 
         if (!user) {
-            return res.status(404).json({
+            return res.status(200).json({
                 success: false,
                 message: "No se encontro el usuario"
             })
@@ -112,7 +112,6 @@ export async function getUser(req, res) {
             message: "Usuario encontrado"
         })
     } catch (error) {
-        console.log(error)
-        error.internalServerError(res)
+        return error.internalServerError(res)
     }
 }
