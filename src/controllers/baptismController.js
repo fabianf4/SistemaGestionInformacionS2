@@ -10,7 +10,7 @@ export async function addBaptism(req, res){
     try{
         const baptism1= await findOneBaptism(book, invoice, number)
         if(baptism1){
-            return res.status(404).json({
+            return res.status(200).json({
                 success: false,
                 message: "Datos de libro, folio y numero ya registrados"
             })
@@ -61,7 +61,7 @@ export async function deleteBaptism(req, res){
         const baptism =await findOneBaptism(book, invoice, number)
 
         if(!baptism){
-            return res.status(404).json({
+            return res.status(200).json({
             success: false,
             message: 'Registro no encontrado'
             });
@@ -86,7 +86,7 @@ export async function updateBaptism(req, res) {
     try {
         const baptism = await baptismalCeritificateModel.findOne({where: {book, invoice, number}});
         if(!baptism) {
-            return res.status(404).json({
+            return res.status(200).json({
                 success: false,
                 message: "Acta de bautismo no encontrada"
             });
