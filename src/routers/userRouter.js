@@ -1,9 +1,9 @@
 import { Router } from "express"
 import { login, register, getUser } from "../controllers/userController.js"
-import validateRole from "../middelware/validateRole.js"
-import validateToken from "../middelware/validateToken.js"
-import loginValidator from "../middelware/userValidators/loginValidator.js"
-import registerValidator from "../middelware/userValidators/registerValidator.js"
+import validateRole from "../middlewares/validateRole.js"
+import validateToken from "../middlewares/validateToken.js"
+import loginValidator from "../middlewares/userValidators/loginValidator.js"
+import registerValidator from "../middlewares/userValidators/registerValidator.js"
 
 const router = new Router()
 

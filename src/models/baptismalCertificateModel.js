@@ -78,7 +78,7 @@ const baptismalCeritificateModel = sequalize.define("baptismalCertificateModel",
     }
 },
 {
-    alter: true
+    alter: false
 })
 baptismalCeritificateModel.sync()
 export default baptismalCeritificateModel

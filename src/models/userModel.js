@@ -37,7 +37,7 @@ const userModel = sequalize.define("User", {
         defaultValue: "USER"
     }
 },{
-    alter: true
+    alter: false //update table if exists
 })
 
 //create table if not exists
