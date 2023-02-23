@@ -1,33 +1,61 @@
-import confirmationCeritificateModel from "../models/confirmationCertificateModel.js";
+import confirmationCeritificateModel from "../models/confirmationCertificateModel.js"
 
-
-async function findOneConfirmation(book, invoice, number){
-    const confirmation= await confirmationCeritificateModel.findOne({where:{book, invoice, number}})
+async function findOneConfirmation(book, invoice, number) {
+    const confirmation = await confirmationCeritificateModel.findOne({
+        where: { book, invoice, number }
+    })
     return confirmation
 }
-export async function addConfirmation(req, res){
-    const{book, invoice, number, name, lastname, birthdate, confirmationDate, fatherName, motherName, placeBaptism, godfather, minister, parson, annotations}= req.body
-    try{
-        const confirmation1= await findOneConfirmation(book, invoice, number)
-        if(confirmation1){
+export async function addConfirmation(req, res) {
+    const {
+        book,
+        invoice,
+        number,
+        name,
+        lastname,
+        birthdate,
+        confirmationDate,
+        fatherName,
+        motherName,
+        placeBaptism,
+        godfather,
+        minister,
+        parson,
+        annotations
+    } = req.body
+    try {
+        const confirmation1 = await findOneConfirmation(book, invoice, number)
+        if (confirmation1) {
             return res.status(200).json({
                 success: false,
                 message: "Datos de libro, folio y numero ya registrados"
             })
         }
         const confirmation = await confirmationCeritificateModel.create({
-            book, invoice, number, name, lastname, birthdate, confirmationDate, fatherName, motherName, placeBaptism, godfather, minister, parson, annotations
-        })
-        
-        return res.status(200).json({
-            success: true,
-            data:{
-                confirmation
-            }, 
-            message: "Acta de confirmacion creada"
+            book,
+            invoice,
+            number,
+            name,
+            lastname,
+            birthdate,
+            confirmationDate,
+            fatherName,
+            motherName,
+            placeBaptism,
+            godfather,
+            minister,
+            parson,
+            annotations
         })
 
-    }catch(err){
+        return res.status(200).json({
+            success: true,
+            data: {
+                confirmation
+            },
+            message: "Acta de confirmacion creada"
+        })
+    } catch (err) {
         return res.status(200).json({
             success: false,
             message: "Error creando acta de confirmacion"
