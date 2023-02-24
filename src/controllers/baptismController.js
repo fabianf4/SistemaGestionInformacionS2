@@ -76,6 +76,12 @@ export async function getBaptismToNameLastname(req, res) {
         const baptism = await baptismalCeritificateModel.findAll({
             where: { name, lastname }
         })
+        if(!baptism || baptism.length===0){
+            return res.status(200).json({
+                success: false,
+                message: "Acta(s) no encontradas"
+            })
+        }
         return res.status(200).json({
             success: true,
             data: {
@@ -84,9 +90,9 @@ export async function getBaptismToNameLastname(req, res) {
             message: "Acta(s) encontrada"
         })
     } catch (err) {
-        return res.status(200).json({
+        return res.status(500).json({
             success: false,
-            message: "No se encontraron actas"
+            message: "Error trayendo actas"
         })
     }
 }
