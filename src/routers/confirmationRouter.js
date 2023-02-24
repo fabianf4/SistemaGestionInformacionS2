@@ -1,17 +1,13 @@
 import { Router } from "express"
-//import { addBaptism, deleteBaptism, getBaptismToNameLastname, updateBaptism } from "../controllers/baptismController.js"
-import {addConfirmation} from "../controllers/confirmationController.js"
-import {getConfirmToNameLastname} from "../controllers/confirmationController.js"
-import {deleteConfirmation} from "../controllers/confirmationController.js"
-import {updateConfirmation} from "../controllers/confirmationController.js"
+import {addConfirmation, getConfirmToNameLastname, deleteConfirmation, updateConfirmation} from "../controllers/confirmationController.js"
 const router= new Router()
-import addConfirmationValidator from "../middlewares/confirmationCertificateValidators/addConfirmationValidator.js"
+import addUpdateConfirmationValidator from "../middlewares/confirmationCertificateValidators/addUpdateConfirmationValidator.js"
+import deleteConfirmationValidator from "../middlewares/confirmationCertificateValidators/deleteConfirmationValidator.js"
+import getConfirmationToNameLastnameValidator from "../middlewares/confirmationCertificateValidators/getConfirmationToNameLastnameValidator.js"
 
-router.post('/addConfirmation', addConfirmationValidator, addConfirmation)
-router.get('/getConfirmToNameLastname',getConfirmToNameLastname)
-
-router.delete('/deleteConfirmation', deleteConfirmation)
-
-router.put('/updateConfirmation', updateConfirmation)
+router.post('/addConfirmation', addUpdateConfirmationValidator, addConfirmation)
+router.get('/getConfirmToNameLastname', getConfirmationToNameLastnameValidator, getConfirmToNameLastname)
+router.delete('/deleteConfirmation', deleteConfirmationValidator, deleteConfirmation)
+router.put('/updateConfirmation', addUpdateConfirmationValidator,updateConfirmation)
 
 export default router

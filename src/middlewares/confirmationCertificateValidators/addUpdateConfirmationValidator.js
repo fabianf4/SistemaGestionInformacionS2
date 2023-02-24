@@ -1,7 +1,7 @@
 import { body } from "express-validator"
 import validateResult from "../validateResult.js"
 
-const addConfirmationValidator = [
+const addUpdateConfirmationValidator = [
     body("book")
         .notEmpty()
         .withMessage("El libro es requerido")
@@ -104,4 +104,4 @@ const addConfirmationValidator = [
     }
 ]
 
-export default addConfirmationValidator
+export default addUpdateConfirmationValidator
