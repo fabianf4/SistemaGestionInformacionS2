@@ -62,40 +62,48 @@ export async function addConfirmation(req, res) {
         })
     }
 }
-/*
-export async function getBaptismToNameLastname(req, res){
+
+export async function getConfirmToNameLastname(req, res){
     const {name, lastname}= req.body
     try{
-        const baptism =await baptismalCeritificateModel.findAll({
+        const confirmation =await confirmationCeritificateModel.findAll({
             where: {name, lastname}
         })
+        if(!confirmation || confirmation.length===0){
+            return res.status(200).json({
+                success: false,
+                message: "Acta(s) no encontradas"
+            })
+        }
         return res.status(200).json({
             success: true,
             data:{
-                baptism
+                confirmation
             },
             message: "Acta(s) encontrada"
         })
     }catch(err){
-        return res.status(200).json({
+        return res.status(500).json({
             success: false,
-            message: "No se encontraron actas"
+            message: "Error trayendo actas"
         })
     }
 }
-export async function deleteBaptism(req, res){
+
+
+export async function deleteConfirmation(req, res){
     try{  
         
         const {book, invoice, number}= req.body
-        const baptism =await findOneBaptism(book, invoice, number)
+        const confirmation =await findOneConfirmation(book, invoice, number)
 
-        if(!baptism){
+        if(!confirmation){
             return res.status(200).json({
             success: false,
             message: 'Registro no encontrado'
             });
         }
-        await baptism.destroy();
+        await confirmation.destroy();
 
         return res.status(200).json({
             success: true,
@@ -110,31 +118,61 @@ export async function deleteBaptism(req, res){
       }
     
 }
-export async function updateBaptism(req, res) {
-    const{book, invoice, number, name, lastname, birthdate, baptismDate, fatherName, motherName, maternalGrandfather, maternalGrandmother, paternalGrandmother, paternalGrandfather,godfather, godmother, minister, parson, annotations}= req.body;
-    try {
-        const baptism = await baptismalCeritificateModel.findOne({where: {book, invoice, number}});
-        if(!baptism) {
+
+
+export async function updateConfirmation(req, res) {
+    const {
+        book,
+        invoice,
+        number,
+        name,
+        lastname,
+        birthdate,
+        confirmationDate,
+        fatherName,
+        motherName,
+        placeBaptism,
+        godfather,
+        minister,
+        parson,
+        annotations
+    } = req.body
+     try {
+        const confirmation = await confirmationCeritificateModel.findOne({where: {book, invoice, number}});
+        if(!confirmation) {
             return res.status(200).json({
                 success: false,
-                message: "Acta de bautismo no encontrada"
+                message: "Acta de Confirmacion no encontrada"
             });
         }
 
-        await baptism.update({
-            book, invoice, number, name, lastname, birthdate, baptismDate, fatherName, motherName, maternalGrandfather, maternalGrandmother, paternalGrandmother, paternalGrandfather, godfather, godmother, minister, parson, annotations
-        });
+        await confirmation.update({
+            book,
+            invoice,
+            number,
+            name,
+            lastname,
+            birthdate,
+            confirmationDate,
+            fatherName,
+            motherName,
+            placeBaptism,
+            godfather,
+            minister,
+            parson,
+            annotations
+        })
         return res.status(200).json({
             success: true,
             data: {
-                baptism
+                confirmation
             },
-            message: "Acta de bautismo actualizada exitosamente"
+            message: "Acta de Confirmacion actualizada exitosamente"
         });
     } catch (err) {
         return res.status(500).json({
             success: false,
-            message: "Error actualizando acta de bautismo"
+            message: "Error actualizando acta de Confirmacion"
         });
     }
-}*/
+}
