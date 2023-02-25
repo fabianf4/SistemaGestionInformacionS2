@@ -22,10 +22,15 @@ const requestCertificateModel = sequalize.define("RequestCertificate", {
         type: DataTypes.DATEONLY,
         allowNull: false
     },
+    type:{
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     status: {
         type: DataTypes.STRING,
         allowNull: false
     }
+
 },{
     alter: false //update table if exists
 })
