@@ -20,10 +20,11 @@ const requestCertificateModel = sequalize.define("RequestCertificate", {
     },
     orderDate: {
         type: DataTypes.DATEONLY,
-        allowNull: false
+        allowNull: false,
+        defaultValue: sequalize.literal('NOW()')
     },
     type:{
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM("CONFIRMACION", "BAUTISMO", "MATRIMONIO"),
         allowNull: false
     },
     status: {
@@ -35,6 +36,6 @@ const requestCertificateModel = sequalize.define("RequestCertificate", {
     alter: false //update table if exists
 })
 
-userModel.sync()
+requestCertificateModel.sync()
 
 export default requestCertificateModel
