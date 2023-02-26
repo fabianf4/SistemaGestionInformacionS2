@@ -1,6 +1,21 @@
 import requestCertificateModel from "../models/requestCertificateModel.js"
 import confirmationCertificateModel from "../models/confirmationCertificateModel.js"
 
+async function findCertificateToType(data, type){
+    let certificate
+    switch (type) {
+        case "CONFIRMACION":
+            certificate= await confirmationCertificateModel.findOne({where : {...data}})
+            
+            break;
+        case "BAUTISMO":
+            
+            break;
+        default:
+            break;
+    }
+    return certificate    
+}
 
 export async function requestConfirmation(req, res){
     const {
@@ -10,13 +25,13 @@ export async function requestConfirmation(req, res){
         fatherName,
         motherName,
         godfather,
-        uuid, 
+        uuid:userUuid, 
         type,
         status
     } = req.body
     
     try{
-        const confirmation= await confirmationCertificateModel.findOne({where :{name, lastname, birthdate, fatherName, motherName, godfather}})
+        const confirmation= await findCertificateToType({name, lastname, birthdate, fatherName, motherName, godfather}, type)
         if(!confirmation){
             return res.status(200).json({
                 success: false,
@@ -24,11 +39,9 @@ export async function requestConfirmation(req, res){
             })    
         }
         const {book, invoice, number} = confirmation
-        const userUuid= uuid
         const requestConfirmation= await requestCertificateModel.create({
             userUuid, book, invoice, number, type, status
         } )
-        console.log({requestConfirmation})
         return res.status(200).json({
             success: true,
             data: {
