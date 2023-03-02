@@ -36,6 +36,5 @@ const requestCertificateModel = sequalize.define("RequestCertificate", {
     alter: false //update table if exists
 })
 
-requestCertificateModel.sync()
-
+requestCertificateModel.sync();
 export default requestCertificateModel
