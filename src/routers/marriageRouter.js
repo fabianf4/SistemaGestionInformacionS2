@@ -3,7 +3,7 @@ import {addMarriage,getMarriageToNameLastname,deleteMarriage,updateMarriage} fro
 const router= new Router()
 
 router.post('/addMarriage',addMarriage)
-router.get('/getMarriageToNameLastname',getMarriageToNameLastname)
+router.post('/getMarriageToNameLastname',getMarriageToNameLastname)
 router.delete('/deleteMarriage',deleteMarriage)
 router.put('/updateMarriage',updateMarriage)
 

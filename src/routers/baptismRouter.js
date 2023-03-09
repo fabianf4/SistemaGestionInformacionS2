@@ -20,7 +20,7 @@ router.post(
     addUpdateBaptismValidator,
     addBaptism
 )
-router.get(
+router.post(
     "/getBaptismToNameLastname",
     validateToken,
     validateRole(["ADMIN"]),

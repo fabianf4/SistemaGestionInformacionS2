@@ -19,7 +19,7 @@ router.post(
     addUpdateConfirmationValidator,
     addConfirmation
 )
-router.get(
+router.post(
     "/getConfirmToNameLastname",
     validateToken,
     validateRole(["ADMIN"]),
