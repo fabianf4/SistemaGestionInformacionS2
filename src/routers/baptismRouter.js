@@ -38,6 +38,7 @@ router.put(
     "/updateBaptism",
     validateToken,
     validateRole(["ADMIN"]),
+    addUpdateBaptismValidator,
     getBaptismToNameLastnameValidator,
     updateBaptism
 )
