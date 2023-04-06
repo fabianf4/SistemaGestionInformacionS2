@@ -92,7 +92,7 @@ export async function getBaptismToNameLastname(req, res) {
     } catch (err) {
         return res.status(500).json({
             success: false,
-            message: "Error trayendo actas"
+            message: "Error buscando actas"
         })
     }
 }
