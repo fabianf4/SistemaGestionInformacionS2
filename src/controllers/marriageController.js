@@ -69,6 +69,7 @@ export async function addMarriage(req, res) {
             message: "Acta de Matrimonio creada"
         })
     } catch (err) {
+        console.log(err);
         return res.status(200).json({
             success: false,
             message: "Error creando acta de Matrimonio"
@@ -77,10 +78,10 @@ export async function addMarriage(req, res) {
 }
 
 export async function getMarriageToNameLastname(req, res){
-    const {name, lastname}= req.body
+    const {namehusband, lastnamehusband}= req.body
     try{
         const marriage =await marriageCertificateModel.findAll({
-            where: {name, lastname}
+            where: {namehusband, lastnamehusband}
         })
         if(!marriage || marriage.length===0){
             return res.status(200).json({

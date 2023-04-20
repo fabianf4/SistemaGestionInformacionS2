@@ -44,13 +44,6 @@ const addUpdateMarriageValidator = [
         .withMessage("La fecha de nacimiento debe ser una fecha")
         .trim()
         .escape(),
-    body("confirmationDate")
-        .notEmpty()
-        .withMessage("La fecha de confirmación es requerida")
-        .isDate()
-        .withMessage("La fecha de confirmación debe ser una fecha")
-        .trim()
-        .escape(),
     body("fatherhusband")
         .notEmpty()
         .withMessage("El nombre del padre es requerido")
@@ -63,13 +56,6 @@ const addUpdateMarriageValidator = [
         .withMessage("El nombre de la madre es requerido")
         .isString()
         .withMessage("El nombre de la madre debe ser una cadena de caracteres")
-        .trim()
-        .escape(),
-    body("placeBaptism")
-        .notEmpty()
-        .withMessage("El lugar de bautismo es requerido")
-        .isString()
-        .withMessage("El lugar de bautismo debe ser una cadena de caracteres")
         .trim()
         .escape(),
     body("namewitness")

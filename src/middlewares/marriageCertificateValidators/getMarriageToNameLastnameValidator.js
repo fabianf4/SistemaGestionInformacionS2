@@ -2,12 +2,12 @@ import { body } from "express-validator"
 import validateResult from "../validateResult.js"
 
 const getMarriageToNameLastnameValidator = [
-    body("name")
+    body("namehusband")
         .notEmpty()
         .withMessage("El nombre es requerido")
         .trim()
         .escape(),
-    body("lastname")
+    body("lastnamehusband")
         .notEmpty()
         .withMessage("El apellido es requerido")
         .trim()
