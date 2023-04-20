@@ -29,6 +29,7 @@ const requestCertificateModel = sequalize.define("RequestCertificate", {
     },
     status: {
         type: DataTypes.STRING,
+        defaultValue: "PENDING",
         allowNull: false
     }
 

@@ -9,7 +9,7 @@ const router = new Router()
 
 router.post("/login", loginValidator, login)
 router.post("/register", registerValidator, register)
-router.get("/profile", validateToken, validateRole(["USER"]), getUser)
+router.get("/profile", validateToken, validateRole(["USER","ADMIN"]), getUser)
 router.put("/profile")
 router.delete("/profile")
 
