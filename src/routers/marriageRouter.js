@@ -7,9 +7,33 @@ import getMarriageToNameLastnameValidator from "../middlewares/marriageCertifica
 import validateToken from "../middlewares/validateToken.js"
 import validateRole from "../middlewares/validateRole.js"
 
-router.post('/addMarriage',addMarriage)
-router.post('/getMarriageToNameLastname',getMarriageToNameLastname)
-router.delete('/deleteMarriage',deleteMarriage)
-router.put('/updateMarriage',updateMarriage)
+router.post(
+    "/addMarriage",
+    validateToken,
+    validateRole(["ADMIN"]),
+    addUpdateMarriageValidator,
+    addMarriage
+)
+router.post(
+    "/getMarriageToNameLastname",
+    validateToken,
+    validateRole(["ADMIN"]),
+    getMarriageToNameLastnameValidator,
+    getMarriageToNameLastname
+)
+router.delete(
+    "/deleteMarriage",
+    validateToken,
+    validateRole(["ADMIN"]),
+    deleteMarriageValidator,
+    deleteMarriage
+)
+router.put(
+    "/updateMarriage",
+    validateToken,
+    validateRole(["ADMIN"]),
+    addUpdateMarriageValidator,
+    updateMarriage
+)
 
 export default router
