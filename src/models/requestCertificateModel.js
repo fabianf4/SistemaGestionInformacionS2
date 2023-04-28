@@ -21,7 +21,7 @@ const requestCertificateModel = sequalize.define("RequestCertificate", {
     orderDate: {
         type: DataTypes.DATEONLY,
         allowNull: false,
-        defaultValue: sequalize.literal('NOW()')
+        defaultValue: sequalize.literal('CURRENT_TIMESTAMP')
     },
     type:{
         type: DataTypes.ENUM("CONFIRMACION", "BAUTISMO", "MATRIMONIO"),

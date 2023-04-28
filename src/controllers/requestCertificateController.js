@@ -29,6 +29,8 @@ async function findCertificateToType(data, type) {
 }
 
 export async function requestConfirmation(req, res) {
+    const { type } = req.body
+
     const {
         name,
         lastname,
@@ -37,14 +39,46 @@ export async function requestConfirmation(req, res) {
         motherName,
         godfather,
         uuid: userUuid,
-        type
+        namehusband,
+        lastnamehusband,
+        namewife,
+        lastnamewife,
+        marrierdate,
+        motherwife,
+        motherhusband
     } = req.body
 
+    console.log(req.body)
+
     try {
-        const certificate = await findCertificateToType(
-            { name, lastname, birthdate, fatherName, motherName, godfather },
-            type
-        )
+        let certificate 
+        if(type != "MATRIMONIO"){
+            certificate = await findCertificateToType(
+                {
+                    name,
+                    lastname,
+                    birthdate,
+                    fatherName,
+                    motherName,
+                    godfather
+                },
+                type
+            )
+        }else{
+            certificate = await findCertificateToType(
+                {
+                    namehusband,
+                    lastnamehusband,
+                    namewife,
+                    lastnamewife,
+                    marrierdate,
+                    motherwife,
+                    motherhusband
+                },
+                type
+            )
+        }
+
         if (!certificate) {
             return res.status(200).json({
                 success: false,
@@ -69,7 +103,7 @@ export async function requestConfirmation(req, res) {
     } catch (err) {
         return res.status(500).json({
             success: false,
-            message: "Error, al solicitar un certificado de confirmacion"
+            message: "Error, al solicitar un certificado"
         })
     }
 }
@@ -92,7 +126,7 @@ export async function getRequestsForDay(req, res) {
                 }
             })
             find[i].dataValues.name = user.name + " " + user.lastname
-            
+
             if (find[i].dataValues.status == "PENDING") {
                 const certificate = await findCertificateToType(
                     { book, invoice, number },
