@@ -1,39 +1,51 @@
-import { Router } from "express"
-import {addMarriage,getMarriageToNameLastname,deleteMarriage,updateMarriage} from "../controllers/marriageController.js"
-const router= new Router()
-import addUpdateMarriageValidator from "../middlewares/marriageCertificateValidators/addUpdateMarriageValidator.js"
-import deleteMarriageValidator from "../middlewares/marriageCertificateValidators/deleteMarriageValidator.js"
-import getMarriageToNameLastnameValidator from "../middlewares/marriageCertificateValidators/getMarriageToNameLastnameValidator.js"
-import validateToken from "../middlewares/validateToken.js"
-import validateRole from "../middlewares/validateRole.js"
+import { Router } from 'express'
+import {
+  addMarriage,
+  getMarriageToNameLastname,
+  deleteMarriage,
+  updateMarriage,
+  getMarriageToBookInvoiceNumber
+} from '../controllers/marriageController.js'
+import addUpdateMarriageValidator from '../middlewares/marriageCertificateValidators/addUpdateMarriageValidator.js'
+import deleteMarriageValidator from '../middlewares/marriageCertificateValidators/deleteMarriageValidator.js'
+import getMarriageToNameLastnameValidator from '../middlewares/marriageCertificateValidators/getMarriageToNameLastnameValidator.js'
+import validateToken from '../middlewares/validateToken.js'
+import validateRole from '../middlewares/validateRole.js'
+const router = new Router()
 
 router.post(
-    "/addMarriage",
-    validateToken,
-    validateRole(["ADMIN"]),
-    addUpdateMarriageValidator,
-    addMarriage
+  '/addMarriage',
+  validateToken,
+  validateRole(['ADMIN']),
+  addUpdateMarriageValidator,
+  addMarriage
 )
-router.post(
-    "/getMarriageToNameLastname",
-    validateToken,
-    validateRole(["ADMIN"]),
-    getMarriageToNameLastnameValidator,
-    getMarriageToNameLastname
+router.get(
+  '/getMarriageToNameLastname/:namehusband/:lastnamehusband',
+  validateToken,
+  validateRole(['ADMIN']),
+  getMarriageToNameLastnameValidator,
+  getMarriageToNameLastname
 )
 router.delete(
-    "/deleteMarriage",
-    validateToken,
-    validateRole(["ADMIN"]),
-    deleteMarriageValidator,
-    deleteMarriage
+  '/deleteMarriage',
+  validateToken,
+  validateRole(['ADMIN']),
+  deleteMarriageValidator,
+  deleteMarriage
 )
 router.put(
-    "/updateMarriage",
-    validateToken,
-    validateRole(["ADMIN"]),
-    addUpdateMarriageValidator,
-    updateMarriage
+  '/updateMarriage',
+  validateToken,
+  validateRole(['ADMIN']),
+  addUpdateMarriageValidator,
+  updateMarriage
+)
+router.get(
+  '/getMarriageToBookInvoiceNumber/:book/:invoice/:number',
+  validateToken,
+  validateRole(['ADMIN']),
+  getMarriageToBookInvoiceNumber
 )
 
 export default router

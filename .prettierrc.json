@@ -1,0 +1,7 @@
+{
+    "extends": "standard",
+    "singleQuote": true,
+    "semi": false,
+    "trailingComma": "none",
+    "spaceBeforeFunctionParen": true
+}
