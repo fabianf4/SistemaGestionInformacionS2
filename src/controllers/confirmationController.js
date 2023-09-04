@@ -177,15 +177,17 @@ export async function updateConfirmation(req, res) {
 export async function getConfirmationToBookInvoiceNumber(req, res) {
   const { book, invoice, number } = req.params
   try {
-    const confirmation = confirmationCeritificateModel.findOne({
+    const confirmation = await confirmationCeritificateModel.findOne({
       where: { book, invoice, number }
     })
+
     if (!confirmation) {
       return res.status(200).json({
         success: false,
         message: 'Acta de Confirmacion no encontrada'
       })
     }
+
     return res.status(200).json({
       success: true,
       data: {

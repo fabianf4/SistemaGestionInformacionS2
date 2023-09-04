@@ -40,7 +40,6 @@ router.put(
   validateToken,
   validateRole(['ADMIN']),
   addUpdateBaptismValidator,
-  getBaptismToNameLastnameValidator,
   updateBaptism
 )
 router.get(

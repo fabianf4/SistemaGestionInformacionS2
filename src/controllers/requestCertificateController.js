@@ -5,6 +5,7 @@ import marriageCertificateModel from '../models/marriageCertificateModel.js'
 import userModel from '../models/userModel.js'
 
 async function findCertificateToType(data, type) {
+  console.log(data)
   let certificate
   switch (type) {
     case 'CONFIRMACION':
@@ -50,7 +51,6 @@ export async function requestConfirmation(req, res) {
       motherName,
       godfather
     } = req.body
-
     const certificate = await findCertificateToType(
       {
         name,
@@ -58,8 +58,7 @@ export async function requestConfirmation(req, res) {
         birthdate,
         fatherName,
         motherName,
-        godfather,
-        uuid: userUuid
+        godfather
       },
       type
     )
@@ -89,6 +88,7 @@ export async function requestConfirmation(req, res) {
       message: 'Solicitud de impresion creada'
     })
   } catch (err) {
+    console.log(err)
     return res.status(500).json({
       success: false,
       message: 'Error creando la solicitud de acta'
